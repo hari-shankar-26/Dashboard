@@ -81,8 +81,11 @@
     &:before {
       height: 8rem;
     }
-  }
-  .info-card-container {
-    flex-wrap: wrap;   
+    .info-card-container {
+      flex-wrap: wrap;
+      .info-card {
+        max-width: calc(50% - 1rem);
+      }
+    }
   }
 }

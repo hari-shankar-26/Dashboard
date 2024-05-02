@@ -1,8 +1,8 @@
 @import "./mixin";
 @import "./color";
 
-$pixel: 4 0.4, 6 0.6, 8 0.8, 10 1, 12 1.2, 14 1.4, 16 1.6, 20 2, 24 2.4, 30 3, 32 3.2, 34 3.4,
-  35 3.5, 40 4, 48 4.8, 50 5;
+$pixel: 4 0.4, 6 0.6, 8 0.8, 10 1, 12 1.2, 14 1.4, 16 1.6, 20 2, 24 2.4, 30 3,
+  32 3.2, 34 3.4, 35 3.5, 40 4, 48 4.8, 50 5;
 
 //font styles here
 @each $font in $pixel {
@@ -63,7 +63,7 @@ $borderShape: solid, dashed;
 
 //Border radius
 
-$borderRadius: 0 0, 8 0.8rem, 10 1rem, 'circle' 50%;
+$borderRadius: 0 0, 8 0.8rem, 10 1rem, "circle" 50%;
 @each $radius in $borderRadius {
   .radius-#{nth($radius, 1)} {
     border-radius: nth($radius, 2) !important;
@@ -203,5 +203,53 @@ $pointer: default, pointer, not-allowed;
 @each $cursor in $pointer {
   .cursor-#{nth($cursor, 1)} {
     cursor: #{nth($cursor, 1)} !important;
+  }
+}
+
+// Responsive styles starts here
+$responsiveSize: "0" "600px" "xxs", "0" "767px" "xs", "768px" "1024px" "sm",
+  "1024px" "1280px" "md", "1280px" "1440px" "lg", "1440px" "1920px" "xl",
+  "1920px" "2800px" "xxl";
+
+@each $responsive in $responsiveSize {
+  @media only screen and (min-width: #{nth($responsive,1)}) and (max-width: #{nth($responsive,2)}) {
+    @each $origin in $spacerOrigin {
+      @each $position in $spacerPositionXY {
+        @each $sizing in $pixel {
+          .#{nth($responsive, 3)}\:#{nth($origin, 1)}#{nth($position, 1)}-#{nth($sizing, 1)} {
+            #{nth($origin, 2)}-#{nth($position, 2)}: nth($sizing, 2) +
+              rem !important;
+            #{nth($origin, 2)}-#{nth($position, 3)}: nth($sizing, 2) +
+              rem !important;
+          }
+        }
+      }
+    }
+
+    @each $origin in $spacerOrigin {
+      @each $sizing in $pixel {
+        .#{nth($responsive, 3)}\:#{nth($origin, 1)}-#{nth($sizing, 1)} {
+          #{nth($origin, 2)}: nth($sizing, 2) + rem !important;
+        }
+      }
+    }
+
+    @each $origin in $spacerOrigin {
+      @each $position in $spacerPosition {
+        @each $sizing in $pixel {
+          .#{nth($responsive, 3)}\:#{nth($origin, 1)}#{nth($position, 1)}-#{nth($sizing, 1)} {
+            #{nth($origin, 2)}-#{nth($position, 2)}: nth($sizing, 2) +
+              rem !important;
+          }
+        }
+      }
+    }
+
+    // sizing for icons
+    @each $circle in $pixel {
+      .#{nth($responsive, 3)}\:size-#{nth($circle, 1)} {
+        @include size(#{nth($circle, 2)}rem !important);
+      }
+    }
   }
 }

@@ -1,8 +1,8 @@
-import React, {useContext} from "react";
-import {windowSize} from '../../../App';
+import React, { useContext } from "react";
+import { windowSize } from "../../../App";
 
-const Collections = ({recipients}) => {
-  const window = useContext(windowSize)
+const Collections = ({ recipients }) => {
+  const window = useContext(windowSize);
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "short", day: "2-digit" };
     const date = new Date(dateString);
@@ -13,24 +13,27 @@ const Collections = ({recipients}) => {
     <>
       {recipients.map((data) => {
         return (
-          <div key={data.id} className="individual-list d-flex align-center justify-between col">
+          <div
+            key={data.id}
+            className="individual-list d-flex align-center justify-between col"
+          >
             <div className="d-flex align-center">
               <img
                 className="size-40 mr-12"
-                src={data.image ? data.image : 'assets/images/person-filler-1.png'}
+                src={
+                  data.image ? data.image : "assets/images/person-filler-1.png"
+                }
                 alt="user"
               />
-              <h4 className="f-14 f-w-500 text-black-100 pr-16">
-                {data.name}
-              </h4>
-              {window > 768 ? 
+              <h4 className="f-14 f-w-500 text-black-100 pr-16">{data.name}</h4>
+              {window.width > 768 ? (
                 <p className="pl-16 f-12 f-w-400 text-black-100 border-l-solid-border">
                   last viewed {formatDate(data.lastViewed)};
-                </p> : null
-              }
+                </p>
+              ) : null}
             </div>
             <div className="d-flex align-center">
-              <div className="d-flex align-center pr-16 border-r-solid-border">
+              <div className="d-flex align-center">
                 <p className="tilt-text f-12 f-w-400 text-grey-1">
                   <span>~</span>
                   {data.distance}
@@ -57,13 +60,17 @@ const Collections = ({recipients}) => {
                   />
                 </div>
               </div>
-              <div className="ml-16 size-34 d-flex align-center justify-center border-solid-border radius-10">
-                <img
-                  className="size-14"
-                  src="/assets/images/location.png"
-                  alt="location"
-                />
-              </div>
+              {window.width > 768 ? (
+                <div className="ml-16 border-l-solid-border pl-16">
+                  <div className="size-34 d-flex align-center justify-center border-solid-border radius-10">
+                    <img
+                      className="size-14"
+                      src="/assets/images/location.png"
+                      alt="location"
+                    />
+                  </div>
+                </div>
+              ) : null}
             </div>
           </div>
         );
