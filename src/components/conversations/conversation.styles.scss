@@ -1,0 +1,16 @@
+.conversations-container {
+    width: 100%;
+    max-width: 39rem;
+    border-right: 1px solid var(--border);
+}
+.conversation-card-list {
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: 1rem;
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+}
+.conversation-card-list + .conversation-card-list {
+    margin-top: 0.4rem;
+}

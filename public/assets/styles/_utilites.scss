@@ -1,0 +1,207 @@
+@import "./mixin";
+@import "./color";
+
+$pixel: 4 0.4, 6 0.6, 8 0.8, 10 1, 12 1.2, 14 1.4, 16 1.6, 20 2, 24 2.4, 30 3, 32 3.2, 34 3.4,
+  35 3.5, 40 4, 48 4.8, 50 5;
+
+//font styles here
+@each $font in $pixel {
+  .f-#{nth($font, 1)} {
+    font-size: #{nth($font, 2)}rem !important;
+  }
+}
+
+$fontweight: 400, 500, 700;
+@each $weight in $fontweight {
+  .f-w-#{nth($weight, 1)} {
+    font-weight: #{nth($weight, 1)} !important;
+  }
+}
+
+$color: primary var(--primary), black-100 var(--black-100), grey-1 var(--grey-1),
+  grey-2 var(--grey-2), border var(--border);
+
+@each $textColor in $color {
+  .text-#{nth($textColor, 1)} {
+    color: nth($textColor, 2) !important;
+  }
+}
+
+@each $bgColor in $color {
+  .bg-#{nth($bgColor, 1)} {
+    background-color: nth($bgColor, 2) !important;
+  }
+}
+
+//hover styles here
+@each $textColor in $color {
+  .text-hover-#{nth($textColor, 1)} {
+    &:hover {
+      color: nth($textColor, 2) !important;
+    }
+  }
+}
+
+.line-normal {
+  line-height: normal;
+}
+
+// Border Style
+
+$borderStyle: border border, border-t border-top, border-b border-bottom,
+  border-l border-left, border-r border-right;
+$borderShape: solid, dashed;
+@each $borderValue in $borderStyle {
+  @each $shape in $borderShape {
+    @each $borderColor in $color {
+      .#{nth($borderValue, 1)}-#{nth($shape, 1)}-#{nth($borderColor, 1)} {
+        #{nth($borderValue, 2)}: 0.063rem nth($shape, 1) nth($borderColor, 2);
+      }
+    }
+  }
+}
+
+//Border radius
+
+$borderRadius: 0 0, 8 0.8rem, 10 1rem, 'circle' 50%;
+@each $radius in $borderRadius {
+  .radius-#{nth($radius, 1)} {
+    border-radius: nth($radius, 2) !important;
+  }
+  //top left
+  .tl-radius-#{nth($radius, 1)} {
+    border-top-left-radius: nth($radius, 2) !important;
+  }
+  //top right
+  .tr-radius-#{nth($radius, 1)} {
+    border-top-right-radius: nth($radius, 2) !important;
+  }
+  //bottom left
+  .bl-radius-#{nth($radius, 1)} {
+    border-bottom-left-radius: nth($radius, 2) !important;
+  }
+  //bottom right
+  .br-radius-#{nth($radius, 1)} {
+    border-bottom-left-radius: nth($radius, 2) !important;
+  }
+}
+
+//margin and padding styles here
+
+$spacerOrigin: "m" margin, "p" padding;
+$spacerPosition: "t" top, "b" bottom, "r" right, "l" left;
+$spacerPositionXY: "x" left right, "y" top bottom;
+
+@each $origin in $spacerOrigin {
+  @each $position in $spacerPositionXY {
+    @each $sizing in $pixel {
+      .#{nth($origin, 1)}#{nth($position, 1)}-#{nth($sizing, 1)} {
+        #{nth($origin, 2)}-#{nth($position, 2)}: nth($sizing, 2) +
+          rem !important;
+        #{nth($origin, 2)}-#{nth($position, 3)}: nth($sizing, 2) +
+          rem !important;
+      }
+    }
+  }
+}
+
+@each $origin in $spacerOrigin {
+  @each $sizing in $pixel {
+    .#{nth($origin, 1)}-#{nth($sizing, 1)} {
+      #{nth($origin, 2)}: nth($sizing, 2) + rem !important;
+    }
+  }
+}
+
+@each $origin in $spacerOrigin {
+  @each $position in $spacerPosition {
+    @each $sizing in $pixel {
+      .#{nth($origin, 1)}#{nth($position, 1)}-#{nth($sizing, 1)} {
+        #{nth($origin, 2)}-#{nth($position, 2)}: nth($sizing, 2) +
+          rem !important;
+      }
+    }
+  }
+}
+
+//Display & Flex Classes
+
+$displayClasses: flex, inline-block, block, none, grid;
+@each $display in $displayClasses {
+  .d-#{$display} {
+    display: $display !important;
+  }
+}
+
+$flexWrap: wrap, nowrap;
+@each $wrap in $flexWrap {
+  .flex-#{$wrap} {
+    flex-wrap: $wrap;
+  }
+}
+
+$flexDirection: column;
+@each $direction in $flexDirection {
+  .flex-#{nth($direction, 1)} {
+    flex-direction: nth($direction, 1);
+  }
+}
+
+$flexFlow: 1, 2, 3, unset;
+@each $flow in $flexFlow {
+  .flex-#{$flow} {
+    flex: $flow;
+  }
+}
+
+$flexAlign: "start" flex-start, "center" center, "end" flex-end,
+  "baseline" baseline, "stretch" stretch;
+@each $align in $flexAlign {
+  .align-#{nth($align, 1)} {
+    align-items: nth($align, 2);
+  }
+}
+
+$flexContent: "start" flex-start, "center" center, "end" flex-end,
+  "between" space-between, "around" space-around, "evenly" space-evenly;
+@each $justify in $flexContent {
+  .justify-#{nth($justify, 1)} {
+    justify-content: nth($justify, 2);
+  }
+}
+
+@each $gap in $pixel {
+  .gap-#{nth($gap, 1)} {
+    gap: nth($gap, 2) + rem;
+  }
+}
+
+/* Column gap styles here */
+@each $gap in $pixel {
+  .col-g-#{nth($gap, 1)} {
+    column-gap: nth($gap, 2) + rem;
+    grid-column-gap: nth($gap, 2) + rem;
+  }
+}
+
+/* Row gap styles here */
+@each $gap in $pixel {
+  .row-g-#{nth($gap, 1)} {
+    row-gap: nth($gap, 2) + rem;
+    grid-row-gap: nth($gap, 2) + rem;
+  }
+}
+
+// sizing for icons
+@each $circle in $pixel {
+  .size-#{nth($circle, 1)} {
+    @include size(#{nth($circle, 2)}rem !important);
+  }
+}
+
+$pointer: default, pointer, not-allowed;
+@each $cursor in $pointer {
+  .cursor-#{nth($cursor, 1)} {
+    cursor: #{nth($cursor, 1)} !important;
+  }
+}
