@@ -30,7 +30,7 @@ const App = () => {
     <windowSize.Provider value={sizeData}>
       <div className={`${sizeData.width < 768 ? "mobile-container" : 'd-flex'}`}>
         {sizeData.width > 768 ? <SideNav />: <MobileSwitchBar />}
-        {sizeData.width > 1024 ? <Conversations /> : null}
+        {sizeData.width > 1118 ? <Conversations /> : null}
         <CollectionList />
       </div>
     </windowSize.Provider>
